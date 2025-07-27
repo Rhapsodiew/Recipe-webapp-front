@@ -92,7 +92,7 @@ function openCreateForm() {
 
 // Submit create recipe
 async function submitCreateForm() {
-  await axios.post('http://localhost:8000/api/recipes', {
+  await axios.post('https://recipe-webapp-back-production.up.railway.app/api/recipes', {
     name: formData.value.name,
     ingredients: formData.value.ingredients.map(ingredient => ({ name: ingredient }))
   })
@@ -102,7 +102,7 @@ async function submitCreateForm() {
 
 // Submit update recipe
 async function submitUpdateForm() {
-  await axios.put(`http://localhost:8000/api/recipes/${formData.value.id}`, {
+  await axios.put(`https://recipe-webapp-back-production.up.railway.app/api/recipes/${formData.value.id}`, {
     name: formData.value.name,
     ingredients: formData.value.ingredients.map(ingredient => ({ name: ingredient }))
   })
@@ -112,7 +112,7 @@ async function submitUpdateForm() {
 // Delete recipe
 async function deleteRecipe(recipe) {
   try {
-    await axios.delete(`http://localhost:8000/api/recipes/${recipe.id}`)
+    await axios.delete(`https://recipe-webapp-back-production.up.railway.app/api/recipes/${recipe.id}`)
     recipes.value = recipes.value.filter(removedRecipe => removedRecipe.id !== recipe.id)
   } catch(err) {
     console.log(err)
@@ -122,7 +122,7 @@ async function deleteRecipe(recipe) {
 // Fetch ingredients
 async function fetchIngredients() {
   try {
-    const res = await axios.get('http://localhost:8000/api/ingredients')
+    const res = await axios.get('https://recipe-webapp-back-production.up.railway.app/api/ingredients')
     ingredients.value = res.data.map(e => e.name)
   } catch (err) {
     console.error(err)
@@ -132,7 +132,7 @@ async function fetchIngredients() {
 // Fetch recipes
 async function fetchRecipes() {
   try {
-    let url = 'http://localhost:8000/api/recipes'
+    let url = 'https://recipe-webapp-back-production.up.railway.app/api/recipes'
     if (selectedIngredient.value) {
       url += `/search?ingredient=${selectedIngredient.value}`
     }
